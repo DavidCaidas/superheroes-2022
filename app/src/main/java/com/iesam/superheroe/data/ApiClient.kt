@@ -4,6 +4,7 @@ import com.iesam.superheroe.data.biography.BiographyApiModel
 import com.iesam.superheroe.data.superheroe.SuperHeroeApiModel
 import com.iesam.superheroe.data.work.WorkApiModel
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 
 /**
@@ -22,6 +23,7 @@ class ApiClient {
 
     fun createRetrofitClient() = Retrofit.Builder()
         .baseUrl(baseEndPoints)
+        .addConverterFactory(GsonConverterFactory.create())
         .build();
 
     fun buildApiEndPoints() = createRetrofitClient().create(ApiServices::class.java)

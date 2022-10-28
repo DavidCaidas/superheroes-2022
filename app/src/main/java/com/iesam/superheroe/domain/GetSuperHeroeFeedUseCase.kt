@@ -1,15 +1,16 @@
 package com.iesam.superheroe.domain
 
 class GetSuperHeroeFeedUseCase(
-    val superHeroeRepository: SuperHeroeRepository,
-    val biographyRepository: BiographyRepository,
-    val workRepository: WorkRepository
+    private val superHeroeRepository: SuperHeroeRepository,
+    private val biographyRepository: BiographyRepository,
+    private val workRepository: WorkRepository
 ) {
 
     fun execute(): List<SuperHeroeFeed> {
-        val superHeroes = superHeroeRepository.getSuperHeroe()
+        val superHeroes = superHeroeRepository.getSuperHeroe().subList(0, 5)
 
-        return superHeroes.map { superHeroe ->
+
+        val list = superHeroes.map { superHeroe ->
             val work = workRepository.getWork(superHeroe.id)
             val biography = biographyRepository.getBiography(superHeroe.id)
 
@@ -21,6 +22,8 @@ class GetSuperHeroeFeedUseCase(
                 biography.realName,
             )
         }
+
+        return list
     }
 
     data class SuperHeroeFeed(
