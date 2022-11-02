@@ -1,10 +1,12 @@
 package com.iesam.superheroe.presentation.adapter
 
+import android.content.Intent
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.iesam.app.extensions.loadUrl
 import com.iesam.superheroe.databinding.ViewItemSuperheroeFeedBinding
 import com.iesam.superheroe.domain.GetSuperHeroeFeedUseCase
+import com.iesam.superheroe.presentation.SuperHeroeDetailActivity
 
 class SuperHeroeViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
@@ -14,6 +16,13 @@ class SuperHeroeViewHolder(private val view: View) : RecyclerView.ViewHolder(vie
         binding.labelNameSuperheroe.text = superHeroe.nameSuperHeroe
         binding.labelRealnameSuperheroe.text = superHeroe.realName
         binding.labelOccupationSuperheroe.text = superHeroe.occupation
+        view.setOnClickListener {
+            view.context.startActivity(
+                SuperHeroeDetailActivity.getIntent(
+                    view.context, superHeroe.id
+                )
+            )
+        }
     }
 
 }
