@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.iesam.superheroe.R
-import com.iesam.superheroe.data.superheroe.SuperHeroeDataRepository
-import com.iesam.superheroe.domain.GetSuperHeroeFeedUseCase
 import kotlin.concurrent.thread
 
 class SuperHeroesFeedActivity : AppCompatActivity() {

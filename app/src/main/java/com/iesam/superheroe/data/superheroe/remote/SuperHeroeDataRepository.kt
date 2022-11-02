@@ -1,6 +1,5 @@
-package com.iesam.superheroe.data.superheroe
+package com.iesam.superheroe.data.superheroe.remote
 
-import com.iesam.superheroe.data.superheroe.SuperHeroeRemoteDataSource
 import com.iesam.superheroe.domain.SuperHeroe
 import com.iesam.superheroe.domain.SuperHeroeRepository
 

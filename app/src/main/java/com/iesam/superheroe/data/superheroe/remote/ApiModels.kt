@@ -1,6 +1,4 @@
-package com.iesam.superheroe.data.superheroe
-
-import com.google.gson.annotations.SerializedName
+package com.iesam.superheroe.data.superheroe.remote
 
 data class SuperHeroeApiModel(
     val id: Int,
