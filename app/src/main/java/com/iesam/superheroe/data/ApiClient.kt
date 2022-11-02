@@ -1,6 +1,8 @@
 package com.iesam.superheroe.data
 
 import com.iesam.superheroe.data.biography.BiographyApiModel
+import com.iesam.superheroe.data.connections.remote.ConnectionsApiModel
+import com.iesam.superheroe.data.powerstats.remote.PowerStatsApiModel
 import com.iesam.superheroe.data.superheroe.remote.SuperHeroeApiModel
 import com.iesam.superheroe.data.work.WorkApiModel
 import retrofit2.Retrofit
@@ -48,6 +50,16 @@ class ApiClient {
 
     fun getWork(superHeroeId: Int): WorkApiModel? {
         val call = apiServices.getWork(superHeroeId).execute()
+        return call.body()
+    }
+
+    fun getConnections(superHeroeId: Int): ConnectionsApiModel? {
+        val call = apiServices.getConnections(superHeroeId).execute()
+        return call.body()
+    }
+
+    fun getPowerStats(superHeroeId: Int): PowerStatsApiModel? {
+        val call = apiServices.getPowerstats(superHeroeId).execute()
         return call.body()
     }
 }

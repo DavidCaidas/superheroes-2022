@@ -8,6 +8,6 @@ class BiographyDataRepository(val remoteDataSource: BiographyRemoteDataSource) :
     BiographyRepository {
 
     override fun getBiography(superHeroeId: Int): Biography {
-        return remoteDataSource.getBiography(superHeroeId) ?: Biography("test")
+        return remoteDataSource.getBiography(superHeroeId) ?: Biography("test", "test")
     }
 }

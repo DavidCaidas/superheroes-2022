@@ -1,6 +1,8 @@
 package com.iesam.superheroe.data
 
 import com.iesam.superheroe.data.biography.BiographyApiModel
+import com.iesam.superheroe.data.connections.remote.ConnectionsApiModel
+import com.iesam.superheroe.data.powerstats.remote.PowerStatsApiModel
 import com.iesam.superheroe.data.superheroe.remote.SuperHeroeApiModel
 import com.iesam.superheroe.data.work.WorkApiModel
 import retrofit2.Call
@@ -19,4 +21,10 @@ interface ApiServices {
 
     @GET("work/{heroId}.json")
     fun getWork(@Path("heroId") heroId: Int): Call<WorkApiModel>
+
+    @GET("connections/{heroId}.json")
+    fun getConnections(@Path("heroId") heroId: Int): Call<ConnectionsApiModel>
+
+    @GET("powerstats/{heroId}.json")
+    fun getPowerstats(@Path("heroId") heroId: Int): Call<PowerStatsApiModel>
 }
