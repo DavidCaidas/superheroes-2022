@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/small_spacing"
+    tools:context=".presentation.SuperHeroesFeedActivity">
+
+    <ImageView
+        android:id="@+id/img_superheroe"
+        android:layout_width="@dimen/size_image_list"
+        android:layout_height="@dimen/size_image_list"
+        android:contentDescription="descripción para la accesibilidad de lo que contiene la imagen"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:scaleType="centerCrop"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/label_name_superheroe"
+        style="@style/TitleCardList"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_horizontal"
+        android:layout_marginEnd="@dimen/spacing_horizontal"
+        app:layout_constraintStart_toEndOf="@id/img_superheroe"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/img_superheroe"
+        tools:text="Superman" />
+
+    <TextView
+        android:id="@+id/label_realname_superheroe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/label_name_superheroe"
+        app:layout_constraintTop_toBottomOf="@id/label_name_superheroe"
+        tools:text="Peter Parker" />
+
+    <TextView
+        android:id="@+id/label_occupation_superheroe"
+        style="@style/CaptionCardList"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        app:layout_constraintEnd_toEndOf="@id/label_name_superheroe"
+        app:layout_constraintBottom_toBottomOf="@id/img_superheroe"
+        app:layout_constraintStart_toStartOf="@id/label_name_superheroe"
+        tools:text="Peter Parker" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

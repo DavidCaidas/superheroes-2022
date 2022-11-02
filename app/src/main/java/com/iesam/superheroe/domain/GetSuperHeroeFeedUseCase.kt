@@ -7,7 +7,7 @@ class GetSuperHeroeFeedUseCase(
 ) {
 
     fun execute(): List<SuperHeroeFeed> {
-        val superHeroes = superHeroeRepository.getSuperHeroe().subList(0, 5)
+        val superHeroes = superHeroeRepository.getSuperHeroe()
 
 
         val list = superHeroes.map { superHeroe ->

@@ -1,7 +1,7 @@
 package com.iesam.superheroe.data
 
 import com.iesam.superheroe.data.biography.BiographyApiModel
-import com.iesam.superheroe.data.superheroe.SuperHeroeApiModel
+import com.iesam.superheroe.data.superheroe.remote.SuperHeroeApiModel
 import com.iesam.superheroe.data.work.WorkApiModel
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -29,6 +29,8 @@ class ApiClient {
     fun buildApiEndPoints() = createRetrofitClient().create(ApiServices::class.java)
 
     fun getSuperHeroes(): List<SuperHeroeApiModel> {
+        apiServices.getSuperHeroesFeed().
+
         val superHeroes = apiServices.getSuperHeroesFeed()
         val response = superHeroes.execute()
         if (response.isSuccessful) {
