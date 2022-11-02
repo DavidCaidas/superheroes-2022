@@ -20,11 +20,12 @@
     <TextView
         android:id="@+id/label_name_superheroe"
         style="@style/TitleCardList"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_horizontal"
         android:layout_marginEnd="@dimen/spacing_horizontal"
         app:layout_constraintStart_toEndOf="@id/img_superheroe"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/img_superheroe"
         tools:text="Superman" />
 
@@ -39,8 +40,10 @@
     <TextView
         android:id="@+id/label_occupation_superheroe"
         style="@style/CaptionCardList"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:maxLines="1"
+        app:layout_constraintEnd_toEndOf="@id/label_name_superheroe"
         app:layout_constraintBottom_toBottomOf="@id/img_superheroe"
         app:layout_constraintStart_toStartOf="@id/label_name_superheroe"
         tools:text="Peter Parker" />

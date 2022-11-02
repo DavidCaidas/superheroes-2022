@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.iesam.superheroe.R
 import com.iesam.superheroe.databinding.ActivitySuperheroeFeedBinding
+import com.iesam.superheroe.domain.GetSuperHeroeFeedUseCase
 import com.iesam.superheroe.presentation.adapter.SuperHeroeAdapter
 import kotlin.concurrent.thread
 
@@ -13,6 +14,7 @@ class SuperHeroesFeedActivity : AppCompatActivity() {
 
     private var binding: ActivitySuperheroeFeedBinding? = null
     private val superHeroeAdapter = SuperHeroeAdapter()
+    private val viewModel = SuperHeroeFactory().getSuperHeroesViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,12 +43,10 @@ class SuperHeroesFeedActivity : AppCompatActivity() {
     }
 
     private fun loadSuperHeroes() {
-        val useCase = SuperHeroeFactory().getSuperHeroeUseCase()
-        thread {
-            val model = useCase.execute()
-            runOnUiThread {
-                superHeroeAdapter.setDataItems(model)
+        viewModel.loadSuperHeroes(object : SuperHeroeCallback {
+            override fun onCall(superHeroesFeed: List<GetSuperHeroeFeedUseCase.SuperHeroeFeed>) {
+                superHeroeAdapter.setDataItems(superHeroesFeed)
             }
-        }
+        })
     }
 }

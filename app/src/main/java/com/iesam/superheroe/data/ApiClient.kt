@@ -29,6 +29,8 @@ class ApiClient {
     fun buildApiEndPoints() = createRetrofitClient().create(ApiServices::class.java)
 
     fun getSuperHeroes(): List<SuperHeroeApiModel> {
+        apiServices.getSuperHeroesFeed().
+
         val superHeroes = apiServices.getSuperHeroesFeed()
         val response = superHeroes.execute()
         if (response.isSuccessful) {
