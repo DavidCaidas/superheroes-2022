@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TitleCardList">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/high_text</item>
+    </style>
+
+    <style name="CaptionCardList">
+        <item name="android:textSize">@dimen/small_text</item>
+        <item name="android:textColor">@color/gray</item>
+    </style>
+
+</resources>

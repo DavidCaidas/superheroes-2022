@@ -1,0 +1,11 @@
+<resources>
+    <dimen name="small_spacing">8dp</dimen>
+    <dimen name="spacing_vertical">16dp</dimen>
+    <dimen name="spacing_horizontal">16dp</dimen>
+    <dimen name="size_image_list">120dp</dimen>
+
+    <!-- Font Size -->
+    <dimen name="small_text">12sp</dimen>
+    <dimen name="medium_text">14sp</dimen>
+    <dimen name="high_text">16sp</dimen>
+</resources>
