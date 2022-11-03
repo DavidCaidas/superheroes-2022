@@ -1,5 +1,6 @@
 package com.iesam.superhero.data.superheroe.local.db
 
+import com.iesam.superhero.data.powerstats.local.PowerStatsLocalDataSource
 import com.iesam.superhero.data.superheroe.local.SuperHeroLocalDataSource
 import com.iesam.superhero.domain.SuperHero
 

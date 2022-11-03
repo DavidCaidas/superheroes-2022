@@ -10,7 +10,6 @@ import kotlinx.coroutines.withContext
 class SuperHerosViewModel(private val getSuperHerosFeed: GetSuperHeroFeedUseCase) : ViewModel() {
 
 
-
     fun loadSuperHeros(superHeroCallback: SuperHeroCallback) {
         viewModelScope.launch(Dispatchers.IO) {
             val superHerosFeed = getSuperHerosFeed.execute()

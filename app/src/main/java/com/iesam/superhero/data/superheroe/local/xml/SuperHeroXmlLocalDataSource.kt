@@ -1,12 +1,10 @@
 package com.iesam.superhero.data.superheroe.local.xml
 
-import android.app.Activity
-import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
+import com.iesam.superhero.data.powerstats.local.PowerStatsLocalDataSource
 import com.iesam.superhero.data.superheroe.local.SuperHeroLocalDataSource
 import com.iesam.superhero.domain.SuperHero
-import com.iesam.superhero.domain.SuperHeroRepository
 
 class SuperHeroXmlLocalDataSource(private val sharedPreferences: SharedPreferences) :
     SuperHeroLocalDataSource {

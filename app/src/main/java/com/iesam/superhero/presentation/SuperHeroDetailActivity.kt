@@ -2,10 +2,11 @@ package com.iesam.superhero.presentation
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import com.iesam.superheroe.R
+import kotlin.concurrent.thread
 
 class SuperHeroDetailActivity : AppCompatActivity() {
 
