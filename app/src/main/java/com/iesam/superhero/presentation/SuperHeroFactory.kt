@@ -2,6 +2,7 @@ package com.iesam.superhero.presentation
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.provider.ContactsContract.Data
 import androidx.room.Room
 import com.iesam.app.data.local.db.AppDatabase
 import com.iesam.app.data.local.mem.MemDataStore
@@ -16,23 +17,50 @@ import com.iesam.superhero.data.powerstats.PowerStatsDataRepository
 import com.iesam.superhero.data.powerstats.local.xml.PowerStatsXmlLocalDataSource
 import com.iesam.superhero.data.powerstats.remote.PowerStatsRemoteDataSource
 import com.iesam.superhero.data.superheroe.SuperHeroDataRepository
+import com.iesam.superhero.data.superheroe.local.db.SuperHeroDbLocalDataSource
 import com.iesam.superhero.data.superheroe.local.xml.SuperHeroXmlLocalDataSource
 import com.iesam.superhero.data.superheroe.remote.SuperHeroRemoteDataSource
 import com.iesam.superhero.data.work.WorkDataRepository
 import com.iesam.superhero.data.work.local.mem.WorkMemLocalDataSource
 import com.iesam.superhero.data.work.remote.WorkRemoteDataSource
 import com.iesam.superhero.domain.*
+import java.sql.Connection
 
 class SuperHeroFactory {
 
-    fun getSuperHerosViewModel(sharedPreferences: SharedPreferences) =
-        SuperHerosViewModel(getSuperHeroUseCase(sharedPreferences))
+    fun getSuperHerosViewModel(applicationContext: Context) =
+        SuperHerosViewModel(getSuperHeroUseCase(applicationContext))
 
-    private fun getSuperHeroUseCase(sharedPreferences: SharedPreferences): GetSuperHeroFeedUseCase {
+    fun getSuperHeroDetailViewModel(
+        sharedPreferences: SharedPreferences,
+        applicationContext: Context
+    ): SuperHeroDetailViewModel {
+        return SuperHeroDetailViewModel(
+            getSuperHeroDetailUseCase(
+                sharedPreferences,
+                applicationContext
+            )
+        )
+    }
+
+    private fun getSuperHeroUseCase(context: Context): GetSuperHeroFeedUseCase {
         return GetSuperHeroFeedUseCase(
-            getSuperHeroRepository(sharedPreferences),
+            getSuperHeroRepository(context),
             getBiographyRepository(),
             getWorkRepository(),
+        )
+    }
+
+    private fun getSuperHeroDetailUseCase(
+        sharedPreferences: SharedPreferences,
+        applicationContext: Context
+    ): GetSuperHeroDetailUseCase {
+        return GetSuperHeroDetailUseCase(
+            getSuperHeroRepository(applicationContext),
+            getBiographyRepository(),
+            getWorkRepository(),
+            getConnectionsRepository(applicationContext),
+            getPowerStatsRepository(sharedPreferences)
         )
     }
 
@@ -59,9 +87,9 @@ class SuperHeroFactory {
         )
     }
 
-    fun getSuperHeroRepository(sharedPreferences: SharedPreferences): SuperHeroRepository {
+    fun getSuperHeroRepository(context: Context): SuperHeroRepository {
         return SuperHeroDataRepository(
-            SuperHeroXmlLocalDataSource(sharedPreferences),
+            SuperHeroDbLocalDataSource(DataBaseSingleton.getInstance(context).superHeroDao()),
             SuperHeroRemoteDataSource(getApiClient())
         )
     }
@@ -91,9 +119,9 @@ class SuperHeroFactory {
     }
 
     object DataStoreSingleton {
-        private val dataStore: MutableMap<Int, Biography> = mutableMapOf()
+        private val dataStore: MutableMap<Int, SuperHero> = mutableMapOf()
 
-        fun put(id: Int, biography: Biography) {
+        fun put(id: Int, biography: SuperHero) {
             dataStore.put(id, biography)
         }
 

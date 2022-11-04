@@ -1,10 +1,10 @@
 package com.iesam.app.data.local.mem
 
-class MemDataStore<T> {
+class MemDataStore<M> {
 
-    private val dataStore: MutableMap<String, T> = mutableMapOf()
+    private val dataStore: MutableMap<String, M> = mutableMapOf()
 
-    fun put(id: String, model: T) {
+    fun put(id: String, model: M) {
         dataStore.put(id, model)
     }
 

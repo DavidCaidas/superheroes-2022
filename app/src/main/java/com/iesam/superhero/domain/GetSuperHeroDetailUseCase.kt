@@ -8,8 +8,22 @@ class GetSuperHeroDetailUseCase(
     private val powerStatsRepository: PowerStatsRepository
 ) {
 
-    fun execute(superHeroId: Int) {
-        val superHero = superHeroRepository.getSuperHero()
+    fun execute(superHeroId: Int): SuperHeroDetail {
+        val superHero = superHeroRepository.getSuperHeroById(superHeroId)!!
+        val biography = biographyRepository.getBiography(superHeroId)
+        val connections = connectionsRepository.getConnections(superHeroId)
+        val powerStats = powerStatsRepository.getPowerStats(superHeroId)
+        return SuperHeroDetail(
+            superHero.getUrlImageXL(),
+            superHero.name,
+            biography.alignment,
+            biography.realName,
+            connections.groupAffiliation,
+            powerStats.intelligence,
+            powerStats.speed,
+            powerStats.combat,
+            superHero.urlImages
+        )
     }
 
     data class SuperHeroDetail(
@@ -21,9 +35,6 @@ class GetSuperHeroDetailUseCase(
         val intelligence: String,
         val speed: String,
         val combat: String,
-        val urlImageS: String,
-        val urlImageM: String,
-        val urlImageL: String,
-        val urlImageXL: String
+        val urlImages: List<String>
     )
 }
