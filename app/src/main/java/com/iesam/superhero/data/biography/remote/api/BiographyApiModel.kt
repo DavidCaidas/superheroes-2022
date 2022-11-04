@@ -1,4 +1,4 @@
-package com.iesam.superhero.data.biography.remote
+package com.iesam.superhero.data.biography.remote.api
 
 import com.google.gson.annotations.SerializedName
 

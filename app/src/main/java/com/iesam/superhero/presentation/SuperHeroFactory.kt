@@ -6,21 +6,24 @@ import androidx.room.Room
 import com.iesam.app.data.local.db.AppDatabase
 import com.iesam.app.data.local.mem.MemDataStore
 import com.iesam.superhero.data.ApiClient
+import com.iesam.superhero.data.appearance.AppearanceDataRepository
+import com.iesam.superhero.data.appearance.local.mem.AppearanceMemLocalDataSource
+import com.iesam.superhero.data.appearance.remote.api.AppearanceApiRemoteDataSource
 import com.iesam.superhero.data.biography.BiographyDataRepository
 import com.iesam.superhero.data.biography.local.mem.BiographyMemLocalDataSource
-import com.iesam.superhero.data.biography.remote.BiographyRemoteDataSource
+import com.iesam.superhero.data.biography.remote.api.BiographyApiRemoteDataSource
 import com.iesam.superhero.data.connections.ConnectionsDataRepository
 import com.iesam.superhero.data.connections.local.db.ConnectionsDbLocalDataSource
-import com.iesam.superhero.data.connections.remote.ConnectionsRemoteDataSource
+import com.iesam.superhero.data.connections.remote.api.ConnectionsApiRemoteDataSource
 import com.iesam.superhero.data.powerstats.PowerStatsDataRepository
 import com.iesam.superhero.data.powerstats.local.xml.PowerStatsXmlLocalDataSource
-import com.iesam.superhero.data.powerstats.remote.PowerStatsRemoteDataSource
+import com.iesam.superhero.data.powerstats.remote.api.PowerStatsApiRemoteDataSource
 import com.iesam.superhero.data.superheroe.SuperHeroDataRepository
 import com.iesam.superhero.data.superheroe.local.db.SuperHeroDbLocalDataSource
-import com.iesam.superhero.data.superheroe.remote.SuperHeroRemoteDataSource
+import com.iesam.superhero.data.superheroe.remote.api.SuperHeroApiRemoteDataSource
 import com.iesam.superhero.data.work.WorkDataRepository
 import com.iesam.superhero.data.work.local.mem.WorkMemLocalDataSource
-import com.iesam.superhero.data.work.remote.WorkRemoteDataSource
+import com.iesam.superhero.data.work.remote.api.WorkApiRemoteDataSource
 import com.iesam.superhero.domain.*
 
 class SuperHeroFactory {
@@ -52,14 +55,15 @@ class SuperHeroFactory {
             getBiographyRepository(),
             getWorkRepository(),
             getConnectionsRepository(applicationContext),
-            getPowerStatsRepository(getSharedPreferences(applicationContext, "power_stats"))
+            getPowerStatsRepository(getSharedPreferences(applicationContext, "power_stats")),
+            getAppearanceRepository()
         )
     }
 
     private fun getBiographyRepository(): BiographyRepository {
         return BiographyDataRepository(
             BiographyMemLocalDataSource(DataStoreSingletonPlus.getInstance()),
-            BiographyRemoteDataSource(getApiClient())
+            BiographyApiRemoteDataSource(getApiClient())
         )
     }
 
@@ -68,28 +72,35 @@ class SuperHeroFactory {
             ConnectionsDbLocalDataSource(
                 DataBaseSingleton.getInstance(applicationContext).connectionsDao()
             ),
-            ConnectionsRemoteDataSource(getApiClient())
+            ConnectionsApiRemoteDataSource(getApiClient())
         )
     }
 
     private fun getPowerStatsRepository(sharedPreferences: SharedPreferences): PowerStatsRepository {
         return PowerStatsDataRepository(
             PowerStatsXmlLocalDataSource(sharedPreferences),
-            PowerStatsRemoteDataSource(getApiClient())
+            PowerStatsApiRemoteDataSource(getApiClient())
         )
     }
 
     fun getSuperHeroRepository(context: Context): SuperHeroRepository {
         return SuperHeroDataRepository(
             SuperHeroDbLocalDataSource(DataBaseSingleton.getInstance(context).superHeroDao()),
-            SuperHeroRemoteDataSource(getApiClient())
+            SuperHeroApiRemoteDataSource(getApiClient())
         )
     }
 
     fun getWorkRepository(): WorkRepository {
         return WorkDataRepository(
             WorkMemLocalDataSource(),
-            WorkRemoteDataSource(getApiClient())
+            WorkApiRemoteDataSource(getApiClient())
+        )
+    }
+
+    fun getAppearanceRepository(): AppearanceRepository {
+        return AppearanceDataRepository(
+            AppearanceMemLocalDataSource(),
+            AppearanceApiRemoteDataSource()
         )
     }
 

@@ -1,8 +1,8 @@
 package com.iesam.superhero.data.superheroe
 
-import com.iesam.superhero.data.powerstats.local.PowerStatsLocalDataSource
 import com.iesam.superhero.data.superheroe.local.SuperHeroLocalDataSource
 import com.iesam.superhero.data.superheroe.remote.SuperHeroRemoteDataSource
+import com.iesam.superhero.data.superheroe.remote.api.SuperHeroApiRemoteDataSource
 import com.iesam.superhero.domain.SuperHero
 import com.iesam.superhero.domain.SuperHeroRepository
 

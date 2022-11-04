@@ -20,3 +20,7 @@ interface ConnectionsRepository {
 interface PowerStatsRepository {
     fun getPowerStats(superHeroId: Int): PowerStats
 }
+
+interface AppearanceRepository {
+    fun getAppearance(superHeroId: Int): Appearance
+}

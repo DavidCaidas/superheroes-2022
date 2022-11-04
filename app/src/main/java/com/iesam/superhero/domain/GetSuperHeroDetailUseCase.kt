@@ -5,7 +5,8 @@ class GetSuperHeroDetailUseCase(
     private val biographyRepository: BiographyRepository,
     private val workRepository: WorkRepository,
     private val connectionsRepository: ConnectionsRepository,
-    private val powerStatsRepository: PowerStatsRepository
+    private val powerStatsRepository: PowerStatsRepository,
+    private val appearanceRepository: AppearanceRepository,
 ) {
 
     fun execute(superHeroId: Int): SuperHeroDetail {
@@ -13,6 +14,7 @@ class GetSuperHeroDetailUseCase(
         val biography = biographyRepository.getBiography(superHeroId)
         val connections = connectionsRepository.getConnections(superHeroId)
         val powerStats = powerStatsRepository.getPowerStats(superHeroId)
+        val appearance = appearanceRepository.getAppearance(superHeroId)
         return SuperHeroDetail(
             superHero.getUrlImageXL(),
             superHero.name,
@@ -22,7 +24,9 @@ class GetSuperHeroDetailUseCase(
             powerStats.intelligence,
             powerStats.speed,
             powerStats.combat,
-            superHero.urlImages
+            superHero.urlImages,
+            appearance.gender,
+            appearance.race
         )
     }
 
@@ -35,6 +39,8 @@ class GetSuperHeroDetailUseCase(
         val intelligence: String,
         val speed: String,
         val combat: String,
-        val urlImages: List<String>
+        val urlImages: List<String>,
+        val gender: String,
+        val race: String
     )
 }

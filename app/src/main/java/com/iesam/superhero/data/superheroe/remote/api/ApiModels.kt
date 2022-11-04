@@ -1,4 +1,4 @@
-package com.iesam.superhero.data.superheroe.remote
+package com.iesam.superhero.data.superheroe.remote.api
 
 data class SuperHeroApiModel(
     val id: Int,

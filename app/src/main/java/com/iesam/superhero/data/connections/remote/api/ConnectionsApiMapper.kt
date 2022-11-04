@@ -1,4 +1,4 @@
-package com.iesam.superhero.data.connections.remote
+package com.iesam.superhero.data.connections.remote.api
 
 import com.iesam.superhero.domain.Connections
 

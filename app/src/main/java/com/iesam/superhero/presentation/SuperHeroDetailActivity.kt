@@ -72,7 +72,8 @@ class SuperHeroDetailActivity : AppCompatActivity() {
         binding?.apply {
             imageMain.loadUrl(model.mainImageUrl)
             labelNameSuperheroe.text = model.nameSuperHero
-            labelRealname.text = model.realName
+            labelRealname.text = getString(R.string.label_realname, model.realName, model.gender)
+            labelRace.text = model.race
             bindAlignment(model.alignment)
             labelGroupAffiliation.text = model.groupAffiliation
             viewIntelligence.labelPowerValue.text = model.intelligence

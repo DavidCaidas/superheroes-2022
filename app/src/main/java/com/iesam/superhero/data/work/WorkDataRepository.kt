@@ -6,7 +6,8 @@ import com.iesam.superhero.domain.Work
 import com.iesam.superhero.domain.WorkRepository
 
 class WorkDataRepository(
-    val localDataSource: WorkMemLocalDataSource, val remoteDataSource: WorkRemoteDataSource
+    private val localDataSource: WorkMemLocalDataSource,
+    private val remoteDataSource: WorkRemoteDataSource
 ) : WorkRepository {
 
     override fun getWork(superHeroId: Int): Work {

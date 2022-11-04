@@ -1,10 +1,10 @@
 package com.iesam.superhero.data
 
-import com.iesam.superhero.data.biography.remote.BiographyApiModel
-import com.iesam.superhero.data.connections.remote.ConnectionsApiModel
-import com.iesam.superhero.data.powerstats.remote.PowerStatsApiModel
-import com.iesam.superhero.data.superheroe.remote.SuperHeroApiModel
-import com.iesam.superhero.data.work.remote.WorkApiModel
+import com.iesam.superhero.data.biography.remote.api.BiographyApiModel
+import com.iesam.superhero.data.connections.remote.api.ConnectionsApiModel
+import com.iesam.superhero.data.powerstats.remote.api.PowerStatsApiModel
+import com.iesam.superhero.data.superheroe.remote.api.SuperHeroApiModel
+import com.iesam.superhero.data.work.remote.api.WorkApiModel
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
