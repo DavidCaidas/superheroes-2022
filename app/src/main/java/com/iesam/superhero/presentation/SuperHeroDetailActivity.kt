@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.iesam.app.extensions.loadUrl
 import com.iesam.superhero.domain.GetSuperHeroDetailUseCase
@@ -26,7 +27,8 @@ class SuperHeroDetailActivity : AppCompatActivity() {
         )
         setupBinding()
         setupView()
-        loadSuperHeroDetail()
+        setupObservers()
+        viewModel?.loadSuperHeroDetails(getSuperHeroId())
     }
 
     private fun setupBinding() {
@@ -52,13 +54,17 @@ class SuperHeroDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun loadSuperHeroDetail() {
-        viewModel?.loadSuperHeroDetails(getSuperHeroId(), object : SuperHeroDetailCallback {
-            override fun onCall(superHeroDetail: GetSuperHeroDetailUseCase.SuperHeroDetail) {
+    private fun setupObservers() {
+        // Create the observer which updates the UI.
+        val superHeroDetailsSubscriber =
+            Observer<GetSuperHeroDetailUseCase.SuperHeroDetail> { superHeroDetail ->
                 bind(superHeroDetail)
             }
-        })
+
+        // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
+        viewModel?.superHeroDetailPublisher?.observe(this, superHeroDetailsSubscriber)
     }
+
 
     private fun getSuperHeroId(): Int = intent.getIntExtra(KEY_SUPERHEROE_ID, 0)
 
