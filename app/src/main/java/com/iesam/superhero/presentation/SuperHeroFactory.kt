@@ -2,7 +2,6 @@ package com.iesam.superhero.presentation
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.provider.ContactsContract.Data
 import androidx.room.Room
 import com.iesam.app.data.local.db.AppDatabase
 import com.iesam.app.data.local.mem.MemDataStore
@@ -18,13 +17,11 @@ import com.iesam.superhero.data.powerstats.local.xml.PowerStatsXmlLocalDataSourc
 import com.iesam.superhero.data.powerstats.remote.PowerStatsRemoteDataSource
 import com.iesam.superhero.data.superheroe.SuperHeroDataRepository
 import com.iesam.superhero.data.superheroe.local.db.SuperHeroDbLocalDataSource
-import com.iesam.superhero.data.superheroe.local.xml.SuperHeroXmlLocalDataSource
 import com.iesam.superhero.data.superheroe.remote.SuperHeroRemoteDataSource
 import com.iesam.superhero.data.work.WorkDataRepository
 import com.iesam.superhero.data.work.local.mem.WorkMemLocalDataSource
 import com.iesam.superhero.data.work.remote.WorkRemoteDataSource
 import com.iesam.superhero.domain.*
-import java.sql.Connection
 
 class SuperHeroFactory {
 
@@ -32,14 +29,10 @@ class SuperHeroFactory {
         SuperHerosViewModel(getSuperHeroUseCase(applicationContext))
 
     fun getSuperHeroDetailViewModel(
-        sharedPreferences: SharedPreferences,
         applicationContext: Context
     ): SuperHeroDetailViewModel {
         return SuperHeroDetailViewModel(
-            getSuperHeroDetailUseCase(
-                sharedPreferences,
-                applicationContext
-            )
+            getSuperHeroDetailUseCase(applicationContext)
         )
     }
 
@@ -52,7 +45,6 @@ class SuperHeroFactory {
     }
 
     private fun getSuperHeroDetailUseCase(
-        sharedPreferences: SharedPreferences,
         applicationContext: Context
     ): GetSuperHeroDetailUseCase {
         return GetSuperHeroDetailUseCase(
@@ -60,7 +52,7 @@ class SuperHeroFactory {
             getBiographyRepository(),
             getWorkRepository(),
             getConnectionsRepository(applicationContext),
-            getPowerStatsRepository(sharedPreferences)
+            getPowerStatsRepository(getSharedPreferences(applicationContext, "power_stats"))
         )
     }
 
@@ -102,6 +94,13 @@ class SuperHeroFactory {
     }
 
     private fun getApiClient() = ApiClient()
+
+    private fun getSharedPreferences(
+        context: Context,
+        nameSharedPreferences: String
+    ): SharedPreferences {
+        return context.getSharedPreferences(nameSharedPreferences, Context.MODE_PRIVATE)
+    }
 
     object DataBaseSingleton {
         private var db: AppDatabase? = null

@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">SuperHero2022</string>
+    <string name="label_intelligence">Inteligencia</string>
+    <string name="label_speed">Velocidad</string>
+    <string name="label_combat">Combate</string>
 </resources>

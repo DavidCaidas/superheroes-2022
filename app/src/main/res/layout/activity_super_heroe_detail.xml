@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="@dimen/spacing_horizontal"
+    android:padding="@dimen/spacing_horizontal"
     tools:context="com.iesam.superhero.presentation.SuperHeroDetailActivity">
-
 
     <ImageView
         android:id="@+id/image_main"
@@ -20,6 +19,8 @@
 
     <TextView
         android:id="@+id/label_name_superheroe"
+        style="@style/Title"
+        android:layout_marginTop="@dimen/spacing_vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/image_main"
@@ -39,6 +40,7 @@
         android:id="@+id/label_realname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small_spacing"
         app:layout_constraintStart_toStartOf="@id/image_main"
         app:layout_constraintTop_toBottomOf="@id/label_name_superheroe"
         tools:text="Pepito Lopez" />
@@ -47,9 +49,54 @@
         android:id="@+id/label_group_affiliation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small_spacing"
         android:maxLines="5"
         app:layout_constraintStart_toStartOf="@id/image_main"
         app:layout_constraintTop_toBottomOf="@id/label_realname"
         tools:text="@tools:sample/lorem/random" />
+
+    <Space
+        android:id="@+id/top_spacing"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/spacing_vertical"
+        app:layout_constraintStart_toStartOf="@id/image_main"
+        app:layout_constraintTop_toBottomOf="@id/label_group_affiliation" />
+
+    <include
+        android:id="@+id/view_intelligence"
+        layout="@layout/view_superhero_stats"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/image_main"
+        app:layout_constraintTop_toBottomOf="@id/top_spacing"
+        app:layout_constraintWidth_percent="0.33" />
+
+    <include
+        android:id="@+id/view_speed"
+        layout="@layout/view_superhero_stats"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/view_intelligence"
+        app:layout_constraintTop_toTopOf="@id/view_intelligence"
+        app:layout_constraintWidth_percent="0.33" />
+
+    <include
+        android:id="@+id/view_combat"
+        layout="@layout/view_superhero_stats"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/view_speed"
+        app:layout_constraintTop_toTopOf="@id/view_intelligence"
+        app:layout_constraintWidth_percent="0.33" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list_images"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/spacing_vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/image_main"
+        app:layout_constraintStart_toStartOf="@id/image_main"
+        app:layout_constraintTop_toBottomOf="@id/view_intelligence" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,7 +12,7 @@ class SuperHerosFeedActivity : AppCompatActivity() {
     private var binding: ActivitySuperheroeFeedBinding? = null
     private val superHeroAdapter = SuperHeroAdapter()
     private val viewModel by lazy {
-        SuperHeroFactory().getSuperHerosViewModel(getSharedPreferences("superheroes", MODE_PRIVATE))
+        SuperHeroFactory().getSuperHerosViewModel(applicationContext)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

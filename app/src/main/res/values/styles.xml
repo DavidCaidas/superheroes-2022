@@ -11,4 +11,11 @@
         <item name="android:textColor">@color/gray</item>
     </style>
 
+    <style name="Title">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/high_text</item>
+        <item name="android:textColor">@color/black</item>
+
+    </style>
+
 </resources>
